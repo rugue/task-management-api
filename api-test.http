@@ -1,0 +1,64 @@
+### Create a new user
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "email": "rugue@example.com",
+  "username": "rugue",
+  "password": "rugue"
+}
+
+### Get all users
+GET http://localhost:3000/user
+
+### Get a user by ID
+GET http://localhost:3000/user/4deb00bc-6836-48e0-872e-8272ad556241
+
+### Update a user
+PATCH http://localhost:3000/user/4deb00bc-6836-48e0-872e-8272ad556241
+Content-Type: application/json
+
+{
+  "username": "osarugue"
+}
+
+### Delete a user
+DELETE http://localhost:3000/users/{id}
+
+### Create a new task
+POST http://localhost:3000/tasks
+Content-Type: application/json
+
+{
+  "title": "New Task",
+  "description": "Task description",
+  "dueDate": "2023-12-31",
+  "status": "pending",
+  "priority": "high",
+  "createdBy": "user-id",
+  "assignedTo": "assignee@example.com",
+  "tags": ["work", "urgent"]
+}
+
+### Get all tasks
+GET http://localhost:3000/tasks
+
+### Get a task by ID
+GET http://localhost:3000/tasks/{id}
+
+### Update a task
+PUT http://localhost:3000/tasks/{id}
+Content-Type: application/json
+
+{
+  "title": "Updated Task",
+  "description": "Updated description",
+  "dueDate": "2024-01-31",
+  "status": "in-progress",
+  "priority": "medium",
+  "assignedTo": "updatedassignee@example.com",
+  "tags": ["update", "important"]
+}
+
+### Delete a task
+DELETE http://localhost:3000/tasks/{id}
