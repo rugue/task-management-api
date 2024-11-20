@@ -1,5 +1,5 @@
 ### Create a new user
-POST http://localhost:3000/users
+POST http://localhost:3000/user
 Content-Type: application/json
 
 {
@@ -12,10 +12,10 @@ Content-Type: application/json
 GET http://localhost:3000/user
 
 ### Get a user by ID
-GET http://localhost:3000/user/4deb00bc-6836-48e0-872e-8272ad556241
+GET http://localhost:3000/user/893176df-1cb2-425a-a3a9-d552e31e8fc2
 
 ### Update a user
-PATCH http://localhost:3000/user/4deb00bc-6836-48e0-872e-8272ad556241
+PATCH http://localhost:3000/user/893176df-1cb2-425a-a3a9-d552e31e8fc2
 Content-Type: application/json
 
 {
@@ -23,10 +23,10 @@ Content-Type: application/json
 }
 
 ### Delete a user
-DELETE http://localhost:3000/users/{id}
+DELETE http://localhost:3000/user/4deb00bc-6836-48e0-872e-8272ad556241
 
 ### Create a new task
-POST http://localhost:3000/tasks
+POST http://localhost:3000/task
 Content-Type: application/json
 
 {
@@ -35,19 +35,19 @@ Content-Type: application/json
   "dueDate": "2023-12-31",
   "status": "pending",
   "priority": "high",
-  "createdBy": "user-id",
+  "createdBy": "893176df-1cb2-425a-a3a9-d552e31e8fc2",
   "assignedTo": "assignee@example.com",
   "tags": ["work", "urgent"]
 }
 
 ### Get all tasks
-GET http://localhost:3000/tasks
+GET http://localhost:3000/task
 
 ### Get a task by ID
-GET http://localhost:3000/tasks/{id}
+GET http://localhost:3000/task/ca63f8e1-3dd4-4fc2-a10f-b9721ccf7cbe
 
 ### Update a task
-PUT http://localhost:3000/tasks/{id}
+PUT http://localhost:3000/task/ca63f8e1-3dd4-4fc2-a10f-b9721ccf7cbe
 Content-Type: application/json
 
 {
@@ -61,4 +61,4 @@ Content-Type: application/json
 }
 
 ### Delete a task
-DELETE http://localhost:3000/tasks/{id}
+DELETE http://localhost:3000/task/ca63f8e1-3dd4-4fc2-a10f-b9721ccf7cbe

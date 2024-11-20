@@ -1,5 +1,4 @@
 import { IsString, IsDate, IsOptional, IsUUID } from 'class-validator';
-import { User } from 'src/user/entities/user.entity';
 
 export class CreateTaskDto {
   @IsString()
@@ -20,7 +19,7 @@ export class CreateTaskDto {
 
   @IsOptional()
   @IsUUID()
-  createdBy?: User;
+  createdBy?: string;
 
   @IsOptional()
   @IsString()
