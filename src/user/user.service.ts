@@ -31,6 +31,10 @@ export class UserService {
     return this.userRepository.findOne({ where: { id } });
   }
 
+  async getUserByEmail(email: string): Promise<User> {
+    return this.userRepository.findOne({ where: { email } });
+  }
+
   async updateUser(id: string, updateUserDto: UpdateUserDto): Promise<User> {
     const { password, ...userData } = updateUserDto;
     const hashedPassword = password

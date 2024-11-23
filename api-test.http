@@ -3,27 +3,27 @@ POST http://localhost:3000/user
 Content-Type: application/json
 
 {
-  "email": "rugue@example.com",
-  "username": "rugue",
-  "password": "rugue"
+  "email": "nehi@example.com",
+  "username": "nehi",
+  "password": "nehi"
 }
 
 ### Get all users
 GET http://localhost:3000/user
 
 ### Get a user by ID
-GET http://localhost:3000/user/893176df-1cb2-425a-a3a9-d552e31e8fc2
+GET http://localhost:3000/user/e478720a-ff08-4c02-8fd4-aa59fdfdde8e
 
-### Update a user
-PATCH http://localhost:3000/user/893176df-1cb2-425a-a3a9-d552e31e8fc2
+### Update a user548843d9-ad42-41b6-ae2a-e7b509dc216c
+PATCH http://localhost:3000/user/e478720a-ff08-4c02-8fd4-aa59fdfdde8e
 Content-Type: application/json
 
 {
-  "username": "osarugue"
+  "email": "nehirugue@gmai.come"
 }
 
 ### Delete a user
-DELETE http://localhost:3000/user/4deb00bc-6836-48e0-872e-8272ad556241
+DELETE http://localhost:3000/user/548843d9-ad42-41b6-ae2a-e7b509dc216c
 
 ### Create a new task
 POST http://localhost:3000/task
@@ -32,10 +32,10 @@ Content-Type: application/json
 {
   "title": "New Task",
   "description": "Task description",
-  "dueDate": "2023-12-31",
+  "dueDate": "2024-11-30T23:59:59.999Z",
   "status": "pending",
   "priority": "high",
-  "createdBy": "893176df-1cb2-425a-a3a9-d552e31e8fc2",
+  "createdBy": "cd219f1c-d56a-4e7c-b138-b31e3220f741",
   "assignedTo": "assignee@example.com",
   "tags": ["work", "urgent"]
 }
@@ -44,10 +44,10 @@ Content-Type: application/json
 GET http://localhost:3000/task
 
 ### Get a task by ID
-GET http://localhost:3000/task/ca63f8e1-3dd4-4fc2-a10f-b9721ccf7cbe
+GET http://localhost:3000/task/610f927b-e819-4350-8ff7-40e73b16d8d1
 
 ### Update a task
-PUT http://localhost:3000/task/ca63f8e1-3dd4-4fc2-a10f-b9721ccf7cbe
+PUT http://localhost:3000/task/610f927b-e819-4350-8ff7-40e73b16d8d1
 Content-Type: application/json
 
 {
@@ -61,4 +61,4 @@ Content-Type: application/json
 }
 
 ### Delete a task
-DELETE http://localhost:3000/task/ca63f8e1-3dd4-4fc2-a10f-b9721ccf7cbe
+DELETE http://localhost:3000/task/610f927b-e819-4350-8ff7-40e73b16d8d1
