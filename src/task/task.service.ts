@@ -33,9 +33,16 @@ export class TaskService {
       throw new InternalServerErrorException('Failed to create task');
     }
   }
-  async getAllTasks(): Promise<Task[]> {
+  async getAllTasks(
+    page: number,
+    limit: number,
+  ): Promise<{ data: Task[]; total: number; page: number; limit: number }> {
     try {
-      return this.taskRepository.find();
+      const [data, total] = await this.taskRepository.findAndCount({
+        skip: (page - 1) * limit,
+        take: limit,
+      });
+      return { data, total, page, limit };
     } catch (error) {
       throw new InternalServerErrorException('Failed to retrieve tasks');
     }

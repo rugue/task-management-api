@@ -6,6 +6,7 @@ import {
   Body,
   Param,
   Put,
+  Query,
 } from '@nestjs/common';
 import { TaskService } from './task.service';
 import { CreateTaskDto } from './dto/create-task.dto';
@@ -20,9 +21,11 @@ export class TaskController {
     return this.taskService.createTask(createTaskDto);
   }
 
-  @Get()
-  getAllTasks() {
-    return this.taskService.getAllTasks();
+  @Get() getAllTasks(
+    @Query('page') page: number = 1,
+    @Query('limit') limit: number = 20,
+  ) {
+    return this.taskService.getAllTasks(page, limit);
   }
 
   @Get(':id')
