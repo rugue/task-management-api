@@ -1,14 +1,26 @@
+import {
+  IsString,
+  IsDate,
+  IsOptional,
+  IsUUID,
+  IsNotEmpty,
+  MinDate,
+} from 'class-validator';
 import { Type } from 'class-transformer';
-import { IsString, IsDate, IsOptional, IsUUID } from 'class-validator';
 
 export class CreateTaskDto {
   @IsString()
+  @IsNotEmpty()
   title: string;
 
   @IsString()
+  @IsNotEmpty()
   description: string;
 
   @IsDate()
+  @MinDate(new Date(), {
+    message: 'Due date must be a future date',
+  })
   @Type(() => Date)
   dueDate: Date;
 
