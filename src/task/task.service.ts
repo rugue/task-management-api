@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -15,35 +19,66 @@ export class TaskService {
     private readonly userRepository: Repository<User>,
   ) {}
   async createTask(createTaskDto: CreateTaskDto): Promise<Task> {
-    const { createdBy, ...taskData } = createTaskDto;
-    const user = await this.userRepository.findOne({
-      where: { id: createdBy },
-    });
-    if (!user) {
-      throw new Error('User not found');
+    try {
+      const { createdBy, ...taskData } = createTaskDto;
+      const user = await this.userRepository.findOne({
+        where: { id: createdBy },
+      });
+      if (!user) {
+        throw new NotFoundException('User not found');
+      }
+      const task = this.taskRepository.create({ ...taskData, createdBy: user });
+      return this.taskRepository.save(task);
+    } catch (error) {
+      throw new InternalServerErrorException('Failed to create task');
     }
-    const task = this.taskRepository.create({ ...taskData, createdBy: user });
-    return this.taskRepository.save(task);
   }
   async getAllTasks(): Promise<Task[]> {
-    return this.taskRepository.find();
+    try {
+      return this.taskRepository.find();
+    } catch (error) {
+      throw new InternalServerErrorException('Failed to retrieve tasks');
+    }
   }
   async getTaskById(id: string): Promise<Task> {
-    return this.taskRepository.findOne({ where: { id } });
+    try {
+      const task = await this.taskRepository.findOne({ where: { id } });
+      if (!task) {
+        throw new NotFoundException('Task not found');
+      }
+      return task;
+    } catch (error) {
+      throw new InternalServerErrorException('Failed to retrieve task');
+    }
   }
   async updateTask(id: string, updateTaskDto: UpdateTaskDto): Promise<Task> {
-    const { createdBy, ...taskData } = updateTaskDto;
-    let user;
-    if (createdBy) {
-      user = await this.userRepository.findOne({ where: { id: createdBy } });
-      if (!user) {
-        throw new Error('User not found');
+    try {
+      const { createdBy, ...taskData } = updateTaskDto;
+      let user;
+      if (createdBy) {
+        user = await this.userRepository.findOne({ where: { id: createdBy } });
+        if (!user) {
+          throw new NotFoundException('User not found');
+        }
       }
+      await this.taskRepository.update(id, { ...taskData, createdBy: user });
+      const updatedTask = await this.taskRepository.findOne({ where: { id } });
+      if (!updatedTask) {
+        throw new NotFoundException('Task not found');
+      }
+      return updatedTask;
+    } catch (error) {
+      throw new InternalServerErrorException('Failed to update task');
     }
-    await this.taskRepository.update(id, { ...taskData, createdBy: user });
-    return this.taskRepository.findOne({ where: { id } });
   }
   async deleteTask(id: string): Promise<void> {
-    await this.taskRepository.delete(id);
+    try {
+      const result = await this.taskRepository.delete(id);
+      if (result.affected === 0) {
+        throw new NotFoundException('Task not found');
+      }
+    } catch (error) {
+      throw new InternalServerErrorException('Failed to delete task');
+    }
   }
 }
