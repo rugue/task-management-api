@@ -12,7 +12,7 @@ import { TaskService } from './task.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 
-@Controller('task')
+@Controller('tasks')
 export class TaskController {
   constructor(private readonly taskService: TaskService) {}
 
@@ -21,7 +21,8 @@ export class TaskController {
     return this.taskService.createTask(createTaskDto);
   }
 
-  @Get() getAllTasks(
+  @Get()
+  getAllTasks(
     @Query('page') page: number = 1,
     @Query('limit') limit: number = 20,
   ) {

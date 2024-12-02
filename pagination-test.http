@@ -1,0 +1,11 @@
+### Retrieve the first page with 20 tasks
+GET http://localhost:3000/tasks?page=1&limit=20
+
+### Retrieve the second page with 20 tasks
+GET http://localhost:3000/tasks?page=2&limit=20
+
+### Retrieve the first page with 10 tasks
+GET http://localhost:3000/tasks?page=1&limit=10
+
+### Retrieve the second page with 10 tasks
+GET http://localhost:3000/tasks?page=2&limit=10
